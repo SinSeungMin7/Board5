@@ -17,6 +17,7 @@ import com.green.controller.HomeController;
 import com.green.user.dto.UserDto;
 import com.green.user.mapper.UserMapper;
 
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
 @Controller
@@ -180,8 +181,34 @@ public class UserController {
 		return  mv;
 	}
 	
+	//---------------------------------------------------------------------------------
+	// 로그인폼 /Users/LoginForm
+	@RequestMapping("/LoginForm")
+	public String loginForm() {
+		return "users/login";
+	}
 	
+	// 로그인 /Users/Login
+	@RequestMapping("/Login")
+	public String login(UserDto userDto,
+			HttpServletRequest request) {
+		
+	   	   UserDto     user = userMapper.getUser(userDto);
+		
+		HttpSession session = request.getSession();
+		session.setAttribute("login", user);
+		
+		return "redirect:/Board/List?menu_id=MENU01";
+	}
 	
+	@RequestMapping("/Logout")
+	public String logout(UserDto userDto,
+			HttpServletRequest request) {
+		
+		HttpSession session = request.getSession();
+		session.invalidate();
+		return "redirect:/";
+	}
 	
 	
 	

@@ -115,8 +115,12 @@
       <tr>
         <td colspan="4">
         	<a href="/Board/WriteForm?menu_id=${board.menu_id}" class="btn btn-primary">새글쓰기</a> <!-- https://getbootstrap.kr/docs/5.2/components/buttons/ 여기서 들고옴 스타일 -->
+        	
+        	<%-- <c:if test = "${sessionScope.login.userid eq board.writer }"> --%> 
+        	<c:if test="${not empty sessionScope.login}">
         	<a href="/Board/UpdateForm?idx=${board.idx}&menu_id=${board.menu_id}"class="btn btn-outline-warning">수정</a>
         	<a href="/Board/Delete?idx=${board.idx }&menu_id=${board.menu_id}"class="btn btn-outline-danger">삭제</a>
+        	</c:if>
         	<a href="/Board/List?menu_id=${board.menu_id}"class="btn btn-info">목록</a>
         	<a href="/"class="btn btn-success">HOME</a>
         </td>
